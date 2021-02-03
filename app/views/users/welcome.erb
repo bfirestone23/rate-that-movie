@@ -1,0 +1,12 @@
+<h1>Welcome to Rate A Movie, <%= @user.username %>!</h1>
+
+<h3>Select a user below to view their reviews:</h3>
+<ul>
+<% User.all.each do |u| %>
+    <li><%= u.username %></li>
+<% end %>
+</ul>
+
+<h3>Create a new review:</h3>
+
+<h3>Select from an existing review to edit or delete:</h3>
