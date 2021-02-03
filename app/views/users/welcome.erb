@@ -1,9 +1,7 @@
-<h1>Welcome to Rate A Movie, <%= @user.username %>!</h1>
-
 <h3>Select a user below to view their reviews:</h3>
 <ul>
 <% User.all.each do |u| %>
-    <li><%= u.username %></li>
+    <li><a href="/users/<%= u.slug %>"><%= u.username %></a></li>
 <% end %>
 </ul>
 
