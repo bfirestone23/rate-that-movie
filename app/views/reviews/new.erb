@@ -1,1 +1,31 @@
 <h3>Create a Review</h3>
+
+<form action="/reviews" method="POST">
+
+<h4>Select from an existing movie or add a new one:</h4>
+<% Movie.all.each do |movie| %>
+    <label for="<%=movie.title%>"><%=movie.title%></label>
+    <input id="<%=movie.title%>" type="checkbox" name="movie[title]" value="<%=movie.title%>">
+<% end %>
+
+<label for="new_movie_title">Movie Title:</label>
+<input id="new_movie_title" name="movie[title]"><br><br>
+<label for="new_movie_genre">Movie Genre:</label>
+<input id="new_movie_genre" name="movie[genre]"><br><br>
+<label for="new_movie_director">Movie Director:</label>
+<input id="new_movie_director" name="movie[director]"><br><br>
+<label for="new_movie_release_date">Movie Release Date:</label>
+<input type="date" id="new_movie_release_date" name="movie[release_date]"><br><br>
+
+<label for="watch_date">Watch Date:</label>
+<input type="date" id="watch_date" name="watch_date"><br><br>
+
+<label for="rating">Rating:</label>
+<input type="number" id="rating" name="rating"><br><br>
+
+<label for="description">Description:</label>
+<textarea for="description" id="description" name="description"></textarea><br><br>
+
+<input type="submit" value="Create Review">
+
+</form>
