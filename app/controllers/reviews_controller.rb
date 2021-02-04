@@ -26,13 +26,13 @@ class ReviewsController < ApplicationController
         @user = User.find_by_id(session[:user_id])
         if params[:existing_movie]
             @movie = Movie.find_by_id(params[:existing_movie][:movie_id])
-            @review = Review.create(watch_date: params[:review][:watch_date], rating: params[:review][:rating], description: params[:review][:description])
+            @review = Review.create(params[:review])
             @review.user = @user
             @review.movie = @movie
             @review.save
         else
-            @movie = Movie.create(title: params[:new_movie][:title], genre: params[:new_movie][:genre], director: params[:new_movie][:director], release_date: params[:new_movie][:release_date])
-            @review = Review.create(watch_date: params[:review][:watch_date], rating: params[:review][:rating], description: params[:review][:description])
+            @movie = Movie.create(params[:new_movie])
+            @review = Review.create(params[:review])
             @review.user = @user
             @review.movie = @movie
             @review.save
