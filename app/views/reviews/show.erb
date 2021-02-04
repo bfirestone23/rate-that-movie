@@ -1,4 +1,11 @@
 <h2><%= @review.user.username %>'s <%= @review.movie.title %> Review</h2>
+<% if @review.user == current_user %>
+    <a href="/reviews/<%= @review.id %>/edit"><button type="submit">Edit</button></a><br><br>
+    <form action="/reviews/<%= @review.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete">
+    </form>
+<% end%>
 
 <h3>Created: </h3><p><%= @review.created_at.strftime("%A, &nbsp;%B %e,&nbsp;%Y") %> at <%= @review.updated_at.strftime("%l:%M%p") %><p>
 <h3>Updated: </h3><p><%= @review.updated_at.strftime("%A, &nbsp;%B %e,&nbsp;%Y") %> at <%= @review.updated_at.strftime("%l:%M%p") %></p>
