@@ -15,22 +15,21 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
-        if logged_in?
-            @user = User.create(params)
-            session[:user_id] = @user.id
-            redirect to "/welcome/#{@user.slug}"
-        else
-            erb :'users/signup'
-        end
+        erb :'users/signup'
     end
 
     post '/signup' do
         if params[:username] == "" || params[:password] == "" || params[:email] == ""
             redirect to '/signup'
         else
-            @user = User.create(params)
-            session[:user_id] = @user.id
-            erb :'users/welcome'
+            existing_user = User.find_by(username: params[:username])
+            if existing_user
+                redirect to '/signup'
+            else
+                @user = User.create(params)
+                session[:user_id] = @user.id
+                erb :'users/welcome'
+            end
         end
     end
 
