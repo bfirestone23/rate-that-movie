@@ -1,4 +1,4 @@
-<h2><%= @review.user.username %>'s <%= @review.movie.title %> Review</h2>
+<h2><%= @review.user.username %>'s <%= @review.movie.title %> review</h2>
 <% if @review.user == current_user %>
     <a href="/reviews/<%= @review.id %>/edit"><button type="submit">Edit</button></a><br><br>
     <form action="/reviews/<%= @review.id %>" method="POST">
