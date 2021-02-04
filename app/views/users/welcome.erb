@@ -8,5 +8,11 @@
 </ul>
 
 <h3>Create a new review:</h3>
+<a href="/reviews/new"><button type="submit">New Review</button></a><br><br>
 
-<h3>Select from an existing review to edit or delete:</h3>
+<h3>Or select from an existing review to edit or delete:</h3>
+<ul>
+<% @user.reviews.each do |review| %>
+    <li><a href="/reviews/<%= review.id %>"><%= review.movie.title %> - <%= review.rating %></a></li>
+<% end %>
+</ul>
