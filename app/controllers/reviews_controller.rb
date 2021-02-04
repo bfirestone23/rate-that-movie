@@ -13,7 +13,6 @@ class ReviewsController < ApplicationController
     end
 
     get '/reviews/:id' do
-        binding.pry
         @review = Review.find_by_id(params[:id])
         erb :'reviews/show'
     end
