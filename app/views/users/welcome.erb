@@ -1,18 +1,17 @@
 <h2>Welcome, <%= @user.username %>!</h2>
 
-<h3>Select a user below to view their reviews:</h3>
+<h3>Select a user below to view their reviews.</h3>
 <ul>
 <% User.all.each do |u| %>
     <li><a href="/users/<%= u.slug %>"><%= u.username %></a></li>
 <% end %>
 </ul>
 
-<h3>Create a new review:</h3>
-<a href="/reviews/new"><button type="submit">New Review</button></a><br><br>
+<h3>Create a new review or select from an existing review to edit or delete.</h3>
+<a href="/reviews/new"><button type="submit">New Review</button></a><br>
 
-<h3>Or select from an existing review to edit or delete:</h3>
 <ul>
 <% @user.reviews.each do |review| %>
-    <li><a href="/reviews/<%= review.id %>"><%= review.movie.title %> - <%= review.rating %></a></li>
+    <li><a href="/reviews/<%= review.id %>"><%= review.movie.title %></a></li>
 <% end %>
 </ul>
