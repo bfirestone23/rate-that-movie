@@ -24,6 +24,7 @@ class UsersController < ApplicationController
         else
             existing_user = User.find_by(username: params[:username])
             if existing_user
+                #Flash msg: User already exists
                 redirect to '/signup'
             else
                 @user = User.create(params)
@@ -49,13 +50,15 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
         else
-            redirect to '/signup'
+            #Flash msg: invalid login
+            redirect to '/login'
         end
     end
 
     get '/logout' do 
         if logged_in?
             session.destroy
+            #Flash msg: Come back soon!
             redirect to "/"
         else
             redirect to '/'
