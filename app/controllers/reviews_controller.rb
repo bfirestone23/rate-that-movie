@@ -5,7 +5,11 @@ class ReviewsController < ApplicationController
     end
 
     get '/reviews/new' do
-        erb :'reviews/new'
+        if logged_in?
+            erb :'reviews/new'
+        else
+            redirect to '/index'
+        end
     end
 
     post '/reviews' do
