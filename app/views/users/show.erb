@@ -1,1 +1,9 @@
 <h3>This is <%= @user.username %>'s page</h3>
+
+<% if @user.reviews.length > 0 %>
+    <% @user.reviews.each do |review| %>
+        <li><a href="/reviews/<%= review.id %>"><%= review.movie.title %></a></li>
+    <% end %>
+<% else %>
+    <p><%= @user.username %> has no reviews - check back later.</p>
+<% end %>
