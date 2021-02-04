@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
     has_many :movies, through: :reviews
 
     def slug
-      username.downcase.gsub(" ", "-")
+        username.downcase.gsub(" ", "-")
     end
 
     def self.find_by_slug(slug)
