@@ -2,7 +2,9 @@
 
 <% if @user.reviews.length > 0 %>
     <% @user.reviews.each do |review| %>
+    <ul>
         <li><a href="/reviews/<%= review.id %>"><%= review.movie.title %></a></li>
+    </ul>
     <% end %>
 <% else %>
     <p><%= @user.username %> has no reviews - check back later.</p>
