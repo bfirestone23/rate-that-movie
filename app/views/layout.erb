@@ -6,7 +6,8 @@
   <body>
     <h1>Rate-A-Movie</h1>
     <% if logged_in? %>
-      <a href="/logout">Log Out</a>
+      <a href="/logout"><button type="submit">Log Out</button></a>
+      <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
     <% end %>
     
 
