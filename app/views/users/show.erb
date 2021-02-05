@@ -1,22 +1,26 @@
-<h2><%= @user.username %>'s reviews:</h2>
+<div>
+    <h2><%= @user.username %>'s reviews:</h2>
+</div>
 
-<% if @user.reviews.length > 0 %>
-    <table>
-    <tr>
-        <th>Movie</th>
-        <th>Genre</th>
-        <th>Rating</th>
-        <th>Link</th>
-    </tr>
-    <% @user.reviews.each do |review| %>
+<div>
+    <% if @user.reviews.length > 0 %>
+        <table>
         <tr>
-            <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
-            <td><%= review.movie.genre %></td>
-            <td><%= review.rating %></td>
-            <td><a href="/reviews/<%= review.id %>">View</a></td>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Link</th>
         </tr>
+        <% @user.reviews.each do |review| %>
+            <tr>
+                <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
+                <td><%= review.movie.genre %></td>
+                <td><%= review.rating %></td>
+                <td><a href="/reviews/<%= review.id %>">View</a></td>
+            </tr>
+        <% end %>
+    </table>
+    <% else %>
+        <p><%= @user.username %> hasn't submitted any reviews yet - check back later.</p>
     <% end %>
-</table>
-<% else %>
-    <p><%= @user.username %> hasn't submitted any reviews yet - check back later.</p>
-<% end %>
+</div>

@@ -1,35 +1,52 @@
-<h2>Welcome, <%= @user.username %>!</h2>
+<div>
+    <h2>Welcome, <%= @user.username %>!</h2>
+</div>
 
-<h3>Create a new review or select from an existing review to edit or delete.</h3>
-<a href="/reviews/new"><button type="submit">New Review</button></a><br>
+<div>
+    <h3>Create a new review or select from an existing review to edit or delete.</h3>
+</div>
 
-<h3>Your reviews:</h3>
-<% if @user.reviews.length > 0 %>
-    <table>
-        <tr>
-            <th>Movie</th>
-            <th>Genre</th>
-            <th>Rating</th>
-            <th>Link</th>
-        </tr>
-        <% @user.reviews.each do |review| %>
-            <tr>
-                <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
-                <td><%= review.movie.genre %></td>
-                <td><%= review.rating %></td>
-                <td><a href="/reviews/<%= review.id %>">View</a></td>
-            </tr>
+<div>
+    <a href="/reviews/new"><button type="submit">New Review</button></a><br>
+</div>
+
+<div>
+    <h3>Your reviews:</h3>
+    
+    <div>
+        <% if @user.reviews.length > 0 %>
+            <table>
+                <tr>
+                    <th>Movie</th>
+                    <th>Genre</th>
+                    <th>Rating</th>
+                    <th>Link</th>
+                </tr>
+                <% @user.reviews.each do |review| %>
+                    <tr>
+                        <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
+                        <td><%= review.movie.genre %></td>
+                        <td><%= review.rating %></td>
+                        <td><a href="/reviews/<%= review.id %>">View</a></td>
+                    </tr>
+                <% end %>
+            </table>
+        <% else %>
+            <p>You haven't submitted any reviews yet!</p>
         <% end %>
-    </table>
-<% else %>
-    <p>You haven't submitted any reviews yet!</p>
-<% end %>
+    </div>
+</div>
 
-<h3>Select a user below to view their reviews.</h3>
-<ul>
-<% User.all.each do |u| %>
-    <% if u != current_user %>
-        <li><a href="/users/<%= u.slug %>"><%= u.username %></a></li>
-    <% end %>
-<% end %>
-</ul>
+<div>
+    <h3>Select a user below to view their reviews.</h3>
+    
+    <div>
+        <ul>
+        <% User.all.each do |u| %>
+            <% if u != current_user %>
+                <li><a href="/users/<%= u.slug %>"><%= u.username %></a></li>
+            <% end %>
+        <% end %>
+        </ul>
+    </div>
+</div>

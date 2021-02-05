@@ -1,34 +1,44 @@
-<h2><%= @movie.title %></h2>
+<div>   
+    <h2><%= @movie.title %></h2>
+</div>
 
-<a href="/movies/<%= @movie.slug %>/edit"><button type="submit">Edit</button></a><br><br>
-<form action="/movies/<%= @movie.slug %>" method="POST">
-<input type="hidden" id="hidden" name="_method" value="DELETE">
-<input type="submit" value="Delete">
-</form>
+<div>
+    <a href="/movies/<%= @movie.slug %>/edit"><button type="submit">Edit</button></a><br><br>
+    <form action="/movies/<%= @movie.slug %>" method="POST">
+        <input type="hidden" id="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Delete">
+    </form>
+</div>
 
-<p>Directed by <%= @movie.director %></p>
-<p>Genre: <%= @movie.genre %></p>
-<p>Release Date: <%= @movie.release_date.strftime("%-m/%-d/%Y") %></p>
+<div>
+    <p>Directed by <%= @movie.director %></p>
+    <p>Genre: <%= @movie.genre %></p>
+    <p>Release Date: <%= @movie.release_date.strftime("%-m/%-d/%Y") %></p>
+</div>
 
-<h3>Reviews:</h3>
+<div>
+    <h3>Reviews:</h3>
+</div>
 
-<% if @movie.reviews.length > 0 %>
-    <table>
-    <tr>
-        <th>User</th>
-        <th>Rating</th>
-        <th>Watch Date</th>
-        <th>Link</th>
-    </tr>
-    <% @movie.reviews.each do |review| %>
-        <tr>
-            <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
-            <td><%= review.rating %></td>
-            <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
-            <td><a href="/reviews/<%= review.id %>">View</a></td>
-        </tr>
+<div>
+    <% if @movie.reviews.length > 0 %>
+        <table>
+            <tr>
+                <th>User</th>
+                <th>Rating</th>
+                <th>Watch Date</th>
+                <th>Link</th>
+            </tr>
+            <% @movie.reviews.each do |review| %>
+                <tr>
+                    <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
+                    <td><%= review.rating %></td>
+                    <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
+                    <td><a href="/reviews/<%= review.id %>">View</a></td>
+                </tr>
+            <% end %>
+        </table>
+    <% else %>
+        <p><%= @movie.title %> doesn't have any reviews yet - check back later.</p>
     <% end %>
-    </table>
-<% else %>
-    <p><%= @movie.title %> doesn't have any reviews yet - check back later.</p>
-<% end %>
+</div>

@@ -1,32 +1,38 @@
-<h2>Create a Review</h2>
 <div>
-<form action="/reviews" method="POST">
-<h3>Select from an existing movie or add a new one to the database:</h3>
-<% Movie.all.each do |movie| %>
-    <label for="<%=movie.title%>"><%=movie.title%></label>
-    <input id="<%=movie.title%>" type="checkbox" name="existing_movie[movie_id]" value="<%=movie.id%>"><br>
-<% end %>
-<br>
-<label for="new_movie_title">Movie Title:</label>
-<input id="new_movie_title" name="new_movie[title]"><br><br>
-<label for="new_movie_genre">Movie Genre:</label>
-<input id="new_movie_genre" name="new_movie[genre]"><br><br>
-<label for="new_movie_director">Movie Director:</label>
-<input id="new_movie_director" name="new_movie[director]"><br><br>
-<label for="new_movie_release_date">Movie Release Date:</label>
-<input type="date" id="new_movie_release_date" name="new_movie[release_date]"><br>
+    <h2>Create a Review</h2>
+<div>
 
-<h3>Your review:</h3>
-<label for="watch_date">Watch Date:</label>
-<input type="date" id="watch_date" name="review[watch_date]"><br><br>
+<div>
+    <form action="/reviews" method="POST">
+        <h3>Select from an existing movie or add a new one to the database:</h3>
+        <% Movie.all.each do |movie| %>
+            <label for="<%=movie.title%>"><%=movie.title%></label>
+            <input id="<%=movie.title%>" type="checkbox" name="existing_movie[movie_id]" value="<%=movie.id%>"><br>
+        <% end %>
+        <br>
+        <label for="new_movie_title">Movie Title:</label>
+        <input id="new_movie_title" name="new_movie[title]"><br><br>
 
-<label for="rating">Rating:</label>
-<input type="number" id="rating" name="review[rating]" step="0.01" min="0"><br><br>
+        <label for="new_movie_genre">Movie Genre:</label>
+        <input id="new_movie_genre" name="new_movie[genre]"><br><br>
 
-<label for="description">Description:</label>
-<textarea for="description" id="description" name="review[description]"></textarea><br><br>
+        <label for="new_movie_director">Movie Director:</label>
+        <input id="new_movie_director" name="new_movie[director]"><br><br>
 
-<input type="submit" value="Create Review">
+        <label for="new_movie_release_date">Movie Release Date:</label>
+        <input type="date" id="new_movie_release_date" name="new_movie[release_date]"><br>
 
-</form>
+        <h3>Your review:</h3>
+        
+        <label for="watch_date">Watch Date:</label>
+        <input type="date" id="watch_date" name="review[watch_date]"><br><br>
+
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="review[rating]" step="0.01" min="0"><br><br>
+
+        <label for="description">Description:</label>
+        <textarea for="description" id="description" name="review[description]"></textarea><br><br>
+
+        <input type="submit" value="Create Review">
+    </form>
 </div>
