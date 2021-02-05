@@ -1,0 +1,20 @@
+<h2>All Movies</h2>
+
+<p>Click on a movie to see more details and view its reviews!</p>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Director</th>
+        <th>Genre</th>
+        <th>Release Date</th>
+    </tr>
+    <% Movie.all.each do |movie| %>
+        <tr>
+            <td><a href="/movies/<%= movie.slug %>"><%= movie.title %></a></td>
+            <td><%= movie.director %></td>
+            <td><%= movie.genre %></td>
+            <td><%= movie.release_date.strftime("%-m/%-d/%Y") %></td>
+        </tr>
+    <% end %>
+</table>
