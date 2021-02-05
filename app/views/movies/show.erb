@@ -1,8 +1,14 @@
 <h2><%= @movie.title %></h2>
 
+<a href="/movies/<%= @movie.slug %>/edit"><button type="submit">Edit</button></a><br><br>
+<form action="/movies/<%= @movie.slug %>" method="POST">
+<input type="hidden" id="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete">
+</form>
+
 <p>Directed by <%= @movie.director %></p>
 <p>Genre: <%= @movie.genre %></p>
-<p>Release Date: <%= @movie.release_date.strftime("%m/%d/%Y") %></p>
+<p>Release Date: <%= @movie.release_date.strftime("%-m/%-d/%Y") %></p>
 
 <h3>Reviews:</h3>
 
