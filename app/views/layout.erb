@@ -8,6 +8,8 @@
     <% if logged_in? %>
       <a href="/logout"><button type="submit">Log Out</button></a>
       <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
+      <a href="/reviews"><button type="submit">All Reviews</button></a>
+      <a href="/movies"><button type="submit">All Movies</button></a>
     <% end %>
     
 
