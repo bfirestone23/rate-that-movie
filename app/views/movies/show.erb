@@ -1,0 +1,28 @@
+<h2><%= @movie.title %></h2>
+
+<p>Directed by <%= @movie.director %></p>
+<p>Genre: <%= @movie.genre %></p>
+<p>Release Date: <%= @movie.release_date.strftime("%m/%d/%Y") %></p>
+
+<h3>Reviews:</h3>
+
+<% if @movie.reviews.length > 0 %>
+    <table>
+    <tr>
+        <th>User</th>
+        <th>Rating</th>
+        <th>Watch Date</th>
+        <th>Link</th>
+    </tr>
+    <% @movie.reviews.each do |review| %>
+        <tr>
+            <td><%= review.user.username %></td>
+            <td><%= review.rating %></td>
+            <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
+            <td><a href="/reviews/<%= review.id %>">View</a></td>
+        </tr>
+    <% end %>
+    </table>
+<% else %>
+    <p><%= @movie.title %> doesn't have any reviews yet - check back later.</p>
+<% end %>
