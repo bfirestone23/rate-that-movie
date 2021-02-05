@@ -82,7 +82,7 @@ class MoviesController < ApplicationController
     delete '/movies/:slug' do 
         if logged_in?
             @movie = Movie.find_by_slug(params[:slug])
-            if @movie.reviews
+            if !@movie.reviews.empty?
                 #Flash msg: Movie has existing reviews, cannot delete
                 redirect to "/movies/#{@movie.slug}"
             else
