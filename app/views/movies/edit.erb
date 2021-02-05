@@ -1,6 +1,6 @@
 <h2>Edit Movie</h2>
 <div>
-<form action="/movies/<%= @movie.id %>" method="POST">
+<form action="/movies/<%= @movie.slug %>" method="POST">
 <input type="hidden" id="hidden" name="_method" value="PATCH">
 
 <label for="title">Title:</label>
