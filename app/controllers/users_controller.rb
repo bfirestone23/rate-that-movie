@@ -8,8 +8,13 @@ class UsersController < ApplicationController
     get '/welcome/:slug' do
         if logged_in?
             @user = User.find_by_slug(params[:slug])
-            erb :'users/welcome'
+            if @user == current_user
+                erb :'users/welcome'
+            else
+                redirect to "/users/#{@user.slug}"
+            end
         else
+            #Flash msg: You do not have access to that page, plesae log in or sign up
             redirect to '/'
         end
     end
