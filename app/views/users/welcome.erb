@@ -14,7 +14,7 @@
         </tr>
         <% @user.reviews.each do |review| %>
             <tr>
-                <td><%= review.movie.title %></td>
+                <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
                 <td><%= review.movie.genre %></td>
                 <td><%= review.rating %></td>
                 <td><a href="/reviews/<%= review.id %>">View</a></td>
