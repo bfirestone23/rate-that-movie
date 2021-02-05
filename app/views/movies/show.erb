@@ -22,7 +22,7 @@
     </tr>
     <% @movie.reviews.each do |review| %>
         <tr>
-            <td><%= review.user.username %></td>
+            <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
             <td><%= review.rating %></td>
             <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
             <td><a href="/reviews/<%= review.id %>">View</a></td>
