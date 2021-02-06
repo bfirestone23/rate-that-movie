@@ -2,14 +2,14 @@
 <html>
   <head>
     <title>Rate-A-Movie</title>
-    <link rel="stylesheet" href="../lib/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheet.css">
   </head>
   <body>
     <div class="layout-title">
       <h1>Rate-A-Movie</h1>
     </div>
 
-    <div>
+    <div class="nav">
       <% if logged_in? %>
         <a href="/logout"><button type="submit">Log Out</button></a>
         <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
