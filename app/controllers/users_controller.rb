@@ -15,7 +15,7 @@ class UsersController < ApplicationController
                 redirect to "/users/#{@user.slug}"
             end
         else
-            #Flash msg: You do not have access to that page, plesae log in or sign up
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         else
             existing_user = User.find_by(username: params[:username])
             if existing_user
-                #Flash msg: User already exists
+                flash[:message] = "User already exists."
                 redirect to '/signup'
             else
                 @user = User.create(params)
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
     get '/login' do
         if logged_in?
             @user = User.find_by_id(session[:user_id])
+            flash[:message] = "You're already logged in!"
             redirect to "/welcome/#{@user.slug}"
         else
             erb :'users/login'
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
         else
-            #Flash msg: invalid login
+            flash[:msesage] = "Invalid username or password."
             redirect to '/login'
         end
     end
@@ -64,7 +65,6 @@ class UsersController < ApplicationController
     get '/logout' do 
         if logged_in?
             session.destroy
-            #Flash msg: Come back soon!
             redirect to "/"
         else
             redirect to '/'
