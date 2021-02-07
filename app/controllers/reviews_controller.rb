@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
 
     get '/reviews' do
+        @request
         erb :'reviews/reviews'
     end
 
