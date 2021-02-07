@@ -11,6 +11,11 @@
     </div>
 
     <div class="nav">
+    
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% end %> 
+
       <% if logged_in? %>
         <% unless @request.env["PATH_INFO"].include?("welcome") %>
           <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
