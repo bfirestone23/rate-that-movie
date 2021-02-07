@@ -12,10 +12,16 @@
 
     <div class="nav">
       <% if logged_in? %>
+        <% unless @request.env["PATH_INFO"].include?("welcome") %>
+          <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
+        <% end %>
+        <% unless @request.env["PATH_INFO"] == "/reviews" %>
+          <a href="/reviews"><button type="submit">All Reviews</button></a>
+        <% end %>
+        <% unless @request.env["PATH_INFO"] == "/movies" %>
+          <a href="/movies"><button type="submit">All Movies</button></a>
+        <% end %>
         <a href="/logout"><button type="submit">Log Out</button></a>
-        <a href="/welcome/<%= current_user.slug %>"><button type="submit">Home</button></a>
-        <a href="/reviews"><button type="submit">All Reviews</button></a>
-        <a href="/movies"><button type="submit">All Movies</button></a>
       <% end %>
     </div>
 
