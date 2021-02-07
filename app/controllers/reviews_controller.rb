@@ -9,6 +9,7 @@ class ReviewsController < ApplicationController
         if logged_in?
             erb :'reviews/new'
         else
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -18,6 +19,7 @@ class ReviewsController < ApplicationController
             @review = Review.find_by_id(params[:id])
             erb :'reviews/show'
         else
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -37,7 +39,7 @@ class ReviewsController < ApplicationController
             @review.movie = @movie
             @review.save
         elsif !params[:existing_movie] && !params[:new_movie][:title] == ""
-            #Flash msg: No movie added
+            flash[:message] = "Please select or add a movie!"
             redirect to "/reviews/new"
         else
             @movie = Movie.create(params[:new_movie])
@@ -45,8 +47,9 @@ class ReviewsController < ApplicationController
             @review.user = @user
             @review.movie = @movie
             @review.save
+
+            flash[:message] = "Review successfully created!"
         end
-        #Flash msg: Review created
         redirect to "/reviews/#{@review.id}"
     end
 
@@ -60,19 +63,20 @@ class ReviewsController < ApplicationController
                 @review.update(params[:review])
                 @review.save
             elsif !params[:existing_movie] && !params[:new_movie][:title] == ""
-                #Flash msg: No movie added
+                flash[:message] = "Please select or add a movie!"
                 redirect to "/reviews/#{@review.id}"
             else
                 @movie = Movie.create(params[:new_movie])
                 @review.movie = @movie
                 @review.update(params[:review])
                 @review.save
+
+                flash[:message] = "Review successfully created!"
             end
-        else
-            #Flash msg: You do not own this review
+        else  
+            flash[:message] = "You do not have access to edit this review!"
             redirect to "/reviews/#{@review.id}"
         end
-        #Flash msg: Review updated
         redirect to "/reviews/#{@review.id}"
     end
 
@@ -81,14 +85,14 @@ class ReviewsController < ApplicationController
             @review = Review.find_by_id(params[:id])
             if @review && @review.user == current_user
                 @review.destroy
-                #Flash msg: Review deleted
+                flash[:message] = "Review successfully deleted!"
                 redirect to "/welcome/#{@review.user.slug}"
             else
-                #Flash msg: You do not own this review
+                flash[:message] = "You do not have access to delete this review!"
                 redirect to "/welcome/#{@review.user.slug}"
             end
         else
-            #Flash msg: You are not logged in
+            flash[:message] = "You are not logged in!"
             redirect to "/"
         end
     end
