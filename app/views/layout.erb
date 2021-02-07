@@ -7,14 +7,15 @@
   </head>
   <body>
     <div class="layout-title">
-      <h1>Rate-A-Movie</h1>
+      <h1 style="font-style: italic">Rate-A-Movie</h1>
     </div>
 
     <div class="nav">
-    
       <% if flash.has?(:message) %>
         <%= flash[:message] %>
       <% end %> 
+      <br>
+      <br>
 
       <% if logged_in? %>
         <% unless @request.env["PATH_INFO"].include?("welcome") %>
