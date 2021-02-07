@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
         if logged_in?
             erb :'movies/movies'
         else
-            #Flash msg: You do not have access to this page, please log in or sign up
+            flash[:message] = "You do not have access to this page! Please log in or sign up below."
             redirect to '/'
         end
     end
