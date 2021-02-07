@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
 
     get '/movies' do
+        @request
         if logged_in?
             erb :'movies/movies'
         else
