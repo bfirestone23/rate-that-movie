@@ -5,7 +5,8 @@ class UsersController < ApplicationController
         erb :'users/show'
     end
 
-    get '/welcome/:slug' do
+    get '/welcome/:slug' do 
+        @request
         if logged_in?
             @user = User.find_by_slug(params[:slug])
             if @user == current_user
