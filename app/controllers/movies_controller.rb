@@ -5,7 +5,7 @@ class MoviesController < ApplicationController
         if logged_in?
             erb :'movies/movies'
         else
-            flash[:message] = "You do not have access to this page! Please log in or sign up below."
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
         if logged_in?
             erb :'movies/new'
         else
-            #Flash msg: You do not have access to this page, please log in or sign up
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -25,11 +25,11 @@ class MoviesController < ApplicationController
             if @movie
                 erb :'movies/show'
             else
-                #Flash msg: Movie does not exist
+                flash[:message] = "That movie does not exist."
                 erb :'movies/movies'
             end
         else
-            #Flash msg: You do not have access to this page, please log in or sign up
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -37,9 +37,14 @@ class MoviesController < ApplicationController
     get '/movies/:slug/edit' do
         if logged_in?
             @movie = Movie.find_by_slug(params[:slug])
-            erb :'movies/edit'
+            if @movie
+                erb :'movies/edit'
+            else
+                flash[:message] = "That movie does not exist."
+                erb :'movies/movies'
+            end
         else
-            #Flash msg: You do not have access to this page, please log in or sign up
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
@@ -47,26 +52,29 @@ class MoviesController < ApplicationController
     post '/movies' do
         existing_movie = Movie.find_by(title: params[:title])
         if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
-            #Flash msg: Fields left blank - please try again.
+            flash[:message] = "You left some fields blank!"
             redirect to '/movies/new'
         elsif existing_movie
-            #Flash msg: Movie already exists in the database.
+            flash[:message] = "That movie already exists in the database."
             redirect to '/movies'
         else
             @movie = Movie.create(params)
-            #Flash msg: Movie successfully created
+
+            flash[:message] = "Movie successfully added!"
             redirect to "/movies/#{@movie.slug}"
         end
     end
 
     patch '/movies/:slug' do
         if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
-            #Flash msg: Fields left blank - please try again.
             @movie = Movie.find_by_slug(params[:slug])
+
+            flash[:message] = "You left some fields blank!"
             redirect to "/movies/#{@movie.slug}/edit"
         elsif Movie.find_by(title: params[:title])
-            #Flash msg: Movie already exists in the database.
             @movie = Movie.find_by(title: params[:title])
+
+            flash[:message] = "That movie already exists in the database."
             redirect to "/movies/#{@movie.slug}"
         else
             @movie = Movie.find_by_slug(params[:slug])
@@ -75,7 +83,8 @@ class MoviesController < ApplicationController
             @movie.genre = params[:genre]
             @movie.release_date = params[:release_date]
             @movie.save
-            #Flash msg: Movie successfully updated
+
+            flash[:message] = "Movie successfully updated!"
             redirect to "/movies/#{@movie.slug}"
         end
     end
@@ -84,15 +93,16 @@ class MoviesController < ApplicationController
         if logged_in?
             @movie = Movie.find_by_slug(params[:slug])
             if !@movie.reviews.empty?
-                #Flash msg: Movie has existing reviews, cannot delete
+                flash[:message] = "That movie cannot be deleted, as it has existing reviews."
                 redirect to "/movies/#{@movie.slug}"
             else
                 @movie.destroy
-                #Flash msg: movie successfully deleted
+
+                flash[:message] = "Movie successfully deleted!"
                 erb :'movies/movies'
             end
         else
-            #Flash msg: You do not have access to this action, please log in or sign up
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
         end
     end
