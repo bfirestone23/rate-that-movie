@@ -52,8 +52,7 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        username = params[:username].downcase
-        @user = User.find_by(username: username)
+        @user = User.find_by(username: params[:username])
 
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
