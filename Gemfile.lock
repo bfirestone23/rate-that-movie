@@ -80,6 +80,7 @@ DEPENDENCIES
   bcrypt
   pg
   pry
+  rack
   rack-flash3
   rake
   require_all
