@@ -7,11 +7,11 @@ gem 'rake'
 gem 'require_all'
 gem 'rack-flash3'
 gem 'bcrypt'
+gem 'thin'
 
 group :development do
     gem 'sqlite3', '~> 1.3.6'
     gem 'shotgun'
-    gem 'thin'
     gem 'pry'
     gem 'tux'
 end
