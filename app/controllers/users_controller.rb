@@ -58,7 +58,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
         else
-            flash[:message] = "Invalid username or password."
+            flash[:message] = "Invalid username or password. Hint: they're case-sensitive!"
             redirect to '/login'
         end
     end
