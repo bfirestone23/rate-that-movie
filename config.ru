@@ -4,4 +4,5 @@ use Rack::MethodOverride
 use MoviesController
 use ReviewsController
 use UsersController
-run ApplicationController
+use ApplicationController
+run Sinatra::Application 
