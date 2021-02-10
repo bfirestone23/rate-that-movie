@@ -58,10 +58,8 @@ class UsersController < ApplicationController
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
-        elsif !@user.authenticate(params[:password]) || @user.username != username
-            flash[:message] = "Invalid username or password."
-            redirect to '/login'
         else
+            flash[:message] = "Invalid username or password."
             redirect to '/login'
         end
     end
