@@ -56,8 +56,10 @@ class UsersController < ApplicationController
         if @user && @user.username.downcase == params[:username].downcase && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
-        else
+        elsif !@user.authenticate(params[:password]) || @user.username.downcase != params[:username].downcase
             flash[:msesage] = "Invalid username or password."
+            redirect to '/login'
+        else
             redirect to '/login'
         end
     end
