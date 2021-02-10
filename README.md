@@ -26,6 +26,10 @@ When creating a review, the user is prompted to either select a movie from the d
 
 A user can edit or delete reviews they've created, but not those of other users. Movies can be updated by any user but not deleted if they are currently being used in a review.
 
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/bfirestone23/rate_a_movie.
+
 ## License
 
 Released under the terms of the [MIT License](https://opensource.org/licenses/MIT).
