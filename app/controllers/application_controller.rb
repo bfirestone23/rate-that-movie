@@ -20,6 +20,17 @@ class ApplicationController < Sinatra::Base
             User.find(session[:user_id])
         end
     end
+
+    not_found do
+        if logged_in?
+            @user = User.find_by_id(session[:user_id])
+            flash[:message] = "That page does not exist."
+            redirect to "/welcome/#{@user.slug}"
+        else
+            flash[:message] = "That page does not exist."
+            erb :index
+        end
+    end
     
     get '/' do
         if logged_in?
