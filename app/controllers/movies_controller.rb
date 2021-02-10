@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
                 erb :'movies/edit'
             else
                 flash[:message] = "That movie does not exist."
-                redirect to "/movies"
+                erb :'movies/movies'
             end
         else
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
