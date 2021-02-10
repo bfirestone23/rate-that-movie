@@ -27,7 +27,6 @@ class ApplicationController < Sinatra::Base
             flash[:message] = "That page does not exist."
             redirect to "/welcome/#{@user.slug}"
         else
-            flash[:message] = "That page does not exist."
             erb :index
         end
     end
