@@ -8,7 +8,7 @@ configure :development do
 end
 
 configure :production do
-
+    set :database, ENV['DATABASE_URL']
 end
 
 # ActiveRecord::Base.establish_connection(
