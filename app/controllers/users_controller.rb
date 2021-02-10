@@ -51,13 +51,14 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        @user = User.find_by(username: params[:username])
+        username = params[:username].downcase
+        @user = User.find_by(username: username)
 
-        if @user && @user.username.downcase == params[:username].downcase && @user.authenticate(params[:password])
+        if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
-        elsif !@user.authenticate(params[:password]) || @user.username.downcase != params[:username].downcase
-            flash[:msesage] = "Invalid username or password."
+        elsif !@user.authenticate(params[:password]) || @user.username != username
+            flash[:message] = "Invalid username or password."
             redirect to '/login'
         else
             redirect to '/login'
