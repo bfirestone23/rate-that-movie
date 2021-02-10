@@ -6,7 +6,7 @@ class MoviesController < ApplicationController
             erb :'movies/movies'
         else
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
-            redirect to '/'
+            erb :index
         end
     end
 
@@ -41,7 +41,7 @@ class MoviesController < ApplicationController
                 erb :'movies/edit'
             else
                 flash[:message] = "That movie does not exist."
-                erb :'movies/movies'
+                redirect to "/movies"
             end
         else
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
@@ -93,7 +93,7 @@ class MoviesController < ApplicationController
         if logged_in?
             @movie = Movie.find_by_slug(params[:slug])
             if !@movie.reviews.empty?
-                flash[:message] = "That movie cannot be deleted, as it has existing reviews."
+                flash[:message] = "This movie cannot be deleted, as it has existing reviews."
                 redirect to "/movies/#{@movie.slug}"
             else
                 @movie.destroy
