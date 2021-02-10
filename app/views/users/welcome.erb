@@ -41,7 +41,7 @@
     <h3>Select a user below to view their reviews.</h3>
     
     <div>
-        <% if @users.length > 0 %>
+        <% if @users.length > 1 %>
             <ul>
             <% User.all.each do |u| %>
                 <% if u != current_user %>
