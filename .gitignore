@@ -11,6 +11,7 @@
 /tmp/
 /db/development.sqlite
 /NOTES
+/spec.md
 
 # Used by dotenv library to load environment variables.
 # .env
