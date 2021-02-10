@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     post '/login' do
         @user = User.find_by(username: params[:username])
 
-        if @user && @user.authenticate(params[:password])
+        if @user && @user.username.downcase == params[:username].downcase && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             redirect to "/welcome/#{@user.slug}"
         else
