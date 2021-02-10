@@ -9,6 +9,7 @@ class UsersController < ApplicationController
         @request
         if logged_in?
             @user = User.find_by_slug(params[:slug])
+            @users = User.all
             if @user == current_user
                 erb :'users/welcome'
             else
