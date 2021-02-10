@@ -11,4 +11,11 @@ gem 'pry'
 gem 'tux'
 gem 'rack-flash3'
 gem 'bcrypt'
-gem 'pg'
+
+group :development do
+    gem 'sqlite3', '~> 1.3.6'
+end
+
+group :production do
+    gem 'pg'
+end 
