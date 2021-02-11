@@ -3,7 +3,11 @@ class ReviewsController < ApplicationController
     get '/reviews' do
         @request
         @reviews = Review.all
-        erb :'reviews/reviews'
+        if logged_in? 
+            erb :'reviews/reviews'
+        else
+            redirect to '/'
+        end
     end
 
     get '/reviews/new' do
@@ -105,9 +109,6 @@ class ReviewsController < ApplicationController
             if @review && @review.user == current_user
                 @review.destroy
                 flash[:message] = "Review successfully deleted!"
-                redirect to "/welcome/#{@review.user.slug}"
-            elsif @review.user != current_user
-                flash[:message] = "You do not have access to delete this review!"
                 redirect to "/welcome/#{@review.user.slug}"
             else
                 flash[:message] = "You do not have access to delete this review!"
