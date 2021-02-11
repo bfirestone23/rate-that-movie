@@ -77,22 +77,11 @@ class ReviewsController < ApplicationController
         @review = Review.find_by_id(params[:id])
         if logged_in?
             if @user == current_user
-                if params[:existing_movie]
-                    @movie = Movie.find_by_id(params[:existing_movie][:movie_id])
-                    @review.movie = @movie
-                    @review.update(params[:review])
-                    @review.save
-                elsif !params[:existing_movie] && !params[:new_movie][:title] == ""
-                    flash[:message] = "Please select or add a movie!"
-                    redirect to "/reviews/#{@review.id}"
-                else
-                    @movie = Movie.create(params[:new_movie])
-                    @review.movie = @movie
-                    @review.update(params[:review])
-                    @review.save
+                @review.update(params[:review])
+                @review.save
 
-                    flash[:message] = "Review successfully created!"
-                end
+                flash[:message] = "Review successfully updated!"
+                redirect to "/reviews/#{@review.id}"
             else  
                 flash[:message] = "You do not have access to edit this review!"
                 redirect to "/reviews/#{@review.id}"
