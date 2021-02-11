@@ -11,20 +11,25 @@
 </div>
 
 <div>
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Director</th>
-        <th>Genre</th>
-        <th>Release Date</th>
-    </tr>
-    <% Movie.all.each do |movie| %>
+
+<% if @movies.length > 0 %>
+    <table>
         <tr>
-            <td><a href="/movies/<%= movie.slug %>"><%= movie.title %></a></td>
-            <td><%= movie.director %></td>
-            <td><%= movie.genre %></td>
-            <td><%= movie.release_date.strftime("%-m/%-d/%Y") %></td>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Genre</th>
+            <th>Release Date</th>
         </tr>
-    <% end %>
-</table>
+        <% Movie.all.each do |movie| %>
+            <tr>
+                <td><a href="/movies/<%= movie.slug %>"><%= movie.title %></a></td>
+                <td><%= movie.director %></td>
+                <td><%= movie.genre %></td>
+                <td><%= movie.release_date.strftime("%-m/%-d/%Y") %></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p>There aren't any movies in the database yet - check back later.</p>
+<% end %>
 </div>

@@ -4,23 +4,29 @@
     <a href="/reviews/new"><button type="submit">New Review</button></a>
 </div>
 
-<table>
-    <tr>
-        <th>User</th>
-        <th>Movie</th>
-        <th>Genre</th>
-        <th>Rating</th>
-        <th>Watch Date</th>
-        <th>Link</th>
-    </tr>
-    <% Review.all.each do |review| %>
+<div>
+<% if @reviews.length > 0 %>
+    <table>
         <tr>
-            <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
-            <td><%= review.movie.title %></td>
-            <td><%= review.movie.genre %></td>
-            <td><%= review.rating %></td>
-            <td><%= review.watch_date.strftime("%-m/%-d/%Y")%></td>
-            <td><a href="/reviews/<%= review.id %>">View</a></td>
+            <th>User</th>
+            <th>Movie</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Watch Date</th>
+            <th>Link</th>
         </tr>
-    <% end %>
-</table>
+        <% Review.all.each do |review| %>
+            <tr>
+                <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
+                <td><%= review.movie.title %></td>
+                <td><%= review.movie.genre %></td>
+                <td><%= review.rating %></td>
+                <td><%= review.watch_date.strftime("%-m/%-d/%Y")%></td>
+                <td><a href="/reviews/<%= review.id %>">View</a></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <p>There aren't any reviews yet - check back later.</p>
+<% end %>
+</div>

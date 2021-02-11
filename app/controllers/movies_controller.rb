@@ -2,6 +2,7 @@ class MoviesController < ApplicationController
 
     get '/movies' do
         @request
+        @movies = Movie.all
         if logged_in?
             erb :'movies/movies'
         else

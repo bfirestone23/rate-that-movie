@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
 
     get '/reviews' do
         @request
+        @reviews = Review.all
         erb :'reviews/reviews'
     end
 
