@@ -51,42 +51,52 @@ class MoviesController < ApplicationController
     end
 
     post '/movies' do
-        existing_movie = Movie.find_by(title: params[:title])
-        if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
-            flash[:message] = "You left some fields blank!"
-            redirect to '/movies/new'
-        elsif existing_movie
-            flash[:message] = "That movie already exists in the database."
-            redirect to '/movies'
-        else
-            @movie = Movie.create(params)
+        if logged_in?
+            existing_movie = Movie.find_by(title: params[:title])
+            if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
+                flash[:message] = "You left some fields blank!"
+                redirect to '/movies/new'
+            elsif existing_movie
+                flash[:message] = "That movie already exists in the database."
+                redirect to '/movies'
+            else
+                @movie = Movie.create(params)
 
-            flash[:message] = "Movie successfully added!"
-            redirect to "/movies/#{@movie.slug}"
+                flash[:message] = "Movie successfully added!"
+                redirect to "/movies/#{@movie.slug}"
+            end
+        else
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
+            redirect to '/'
         end
     end
 
     patch '/movies/:slug' do
-        if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
-            @movie = Movie.find_by_slug(params[:slug])
+        if logged_in?
+            if params[:title] == "" || params[:director] == "" || params[:genre] == "" || params[:release_date] == ""
+                @movie = Movie.find_by_slug(params[:slug])
 
-            flash[:message] = "You left some fields blank!"
-            redirect to "/movies/#{@movie.slug}/edit"
-        elsif Movie.find_by(title: params[:title])
-            @movie = Movie.find_by(title: params[:title])
+                flash[:message] = "You left some fields blank!"
+                redirect to "/movies/#{@movie.slug}/edit"
+            elsif Movie.find_by(title: params[:title])
+                @movie = Movie.find_by(title: params[:title])
 
-            flash[:message] = "That movie already exists in the database."
-            redirect to "/movies/#{@movie.slug}"
+                flash[:message] = "That movie already exists in the database."
+                redirect to "/movies/#{@movie.slug}"
+            else
+                @movie = Movie.find_by_slug(params[:slug])
+                @movie.title = params[:title]
+                @movie.director = params[:director]
+                @movie.genre = params[:genre]
+                @movie.release_date = params[:release_date]
+                @movie.save
+
+                flash[:message] = "Movie successfully updated!"
+                redirect to "/movies/#{@movie.slug}"
+            end
         else
-            @movie = Movie.find_by_slug(params[:slug])
-            @movie.title = params[:title]
-            @movie.director = params[:director]
-            @movie.genre = params[:genre]
-            @movie.release_date = params[:release_date]
-            @movie.save
-
-            flash[:message] = "Movie successfully updated!"
-            redirect to "/movies/#{@movie.slug}"
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
+            redirect to '/'
         end
     end
 
