@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
 
     get '/users/:slug' do
-        @user = User.find_by_slug(params[:slug])
-        erb :'users/show'
+        if logged_in?
+            @user = User.find_by_slug(params[:slug])
+            erb :'users/show'
+        else
+            flash[:message] = "You do not have access to that page! Please log in or sign up below."
+            redirect to '/'
+        end
     end
 
     get '/welcome/:slug' do 
@@ -22,21 +27,33 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
-        erb :'users/signup'
+        if logged_in?
+            @user = User.find_by_id(session[:user_id])
+            flash[:message] = "You're already logged in!"
+            redirect to "/welcome/#{@user.slug}"
+        else
+            erb :'users/signup'
+        end
     end
 
     post '/signup' do
-        if params[:username] == "" || params[:password] == "" || params[:email] == ""
-            redirect to '/signup'
+        if logged_in?
+            @user = User.find_by_id(session[:user_id])
+            flash[:message] = "You're already logged in!"
+            redirect to "/welcome/#{@user.slug}"
         else
-            existing_user = User.find_by(username: params[:username])
-            if existing_user
-                flash[:message] = "User already exists."
+            if params[:username] == "" || params[:password] == "" || params[:email] == ""
                 redirect to '/signup'
             else
-                @user = User.create(params)
-                session[:user_id] = @user.id
-                erb :'users/welcome'
+                existing_user = User.find_by(username: params[:username])
+                if existing_user
+                    flash[:message] = "User already exists."
+                    redirect to '/signup'
+                else
+                    @user = User.create(params)
+                    session[:user_id] = @user.id
+                    erb :'users/welcome'
+                end
             end
         end
     end
@@ -52,14 +69,19 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        @user = User.find_by(username: params[:username])
-
-        if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
+        if logged_in?
+            @user = User.find_by_id(session[:user_id])
+            flash[:message] = "You're already logged in!"
             redirect to "/welcome/#{@user.slug}"
         else
-            flash[:message] = "Invalid username or password. Hint: they're case-sensitive!"
-            redirect to '/login'
+            @user = User.find_by(username: params[:username])
+            if @user && @user.authenticate(params[:password])
+                session[:user_id] = @user.id
+                redirect to "/welcome/#{@user.slug}"
+            else
+                flash[:message] = "Invalid username or password. Hint: they're case-sensitive!"
+                redirect to '/login'
+            end
         end
     end
 
@@ -68,6 +90,7 @@ class UsersController < ApplicationController
             session.destroy
             redirect to "/"
         else
+            flash[:message] = "You are not logged in!"
             redirect to '/'
         end
     end
