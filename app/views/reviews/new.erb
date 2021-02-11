@@ -5,6 +5,7 @@
 <div>
     <form action="/reviews" method="POST">
         <h3>Select from an existing movie or add a new one to the database:</h3>
+
         <label for="movie_title">Select a movie</label>
         <select id="movie_title" name="existing_movie[movie_id]">
         <option value="none" selected disabled hidden></option>
@@ -13,6 +14,7 @@
         <% end %>
         </select>
         <br>
+        
         <div>
             <label for="new_movie_title">Movie Title:</label>
             <input id="new_movie_title" name="new_movie[title]"><br>
