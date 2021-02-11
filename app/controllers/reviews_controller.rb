@@ -31,7 +31,6 @@ class ReviewsController < ApplicationController
 
         if logged_in? && @user == current_user
             erb :'reviews/edit'
-            redirect to "/reviews/#{params[:id]}"
         elsif !logged_in?
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
             redirect to '/'
