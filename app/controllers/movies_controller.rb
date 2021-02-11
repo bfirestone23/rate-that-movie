@@ -108,7 +108,7 @@ class MoviesController < ApplicationController
                 redirect to "/movies/#{@movie.slug}"
             else
                 @movie.destroy
-
+                @movies = Movie.all
                 flash[:message] = "Movie successfully deleted!"
                 erb :'movies/movies'
             end
