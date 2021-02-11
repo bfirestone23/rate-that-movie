@@ -12,9 +12,8 @@
 
     <div class="nav">
       <% if flash.has?(:message) %>
-        <%= flash[:message] %>
+        <%= flash[:message] %><br>
       <% end %> 
-      <br>
       <br>
 
       <% if logged_in? %>

@@ -3,10 +3,10 @@
 </div>
 
 <div>
-    <a href="/movies/<%= @movie.slug %>/edit"><button type="submit">Edit</button></a><br><br>
+    <a href="/movies/<%= @movie.slug %>/edit"><button type="submit">Edit Movie</button></a><br>
     <form action="/movies/<%= @movie.slug %>" method="POST">
         <input type="hidden" id="hidden" name="_method" value="DELETE">
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete Movie">
     </form>
 </div>
 
@@ -34,7 +34,7 @@
                     <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
                     <td><%= review.rating %></td>
                     <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
-                    <td><a href="/reviews/<%= review.id %>">View</a></td>
+                    <td><a href="/reviews/<%= review.id %>">View Review</a></td>
                 </tr>
             <% end %>
         </table>

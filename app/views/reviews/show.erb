@@ -4,10 +4,10 @@
 
 <div>
     <% if @review.user == current_user %>
-        <a href="/reviews/<%= @review.id %>/edit"><button type="submit">Edit</button></a><br><br>
+        <a href="/reviews/<%= @review.id %>/edit"><button type="submit">Edit Review</button></a><br>
         <form action="/reviews/<%= @review.id %>" method="POST">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
-            <input type="submit" value="Delete">
+            <input type="submit" value="Delete Review">
         </form>
     <% end%>
 </div>
