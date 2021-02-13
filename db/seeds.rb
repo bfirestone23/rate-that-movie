@@ -1,13 +1,30 @@
-User.create(username: "michael", password: "test", email: "bfirestone2339@gmail.com")
-User.create(username: "marcus", password: "test", email: "bfirestone2339@gmail.com")
-User.create(username: "andrew", password: "test", email: "bfirestone2339@gmail.com")
-User.create(username: "jordan", password: "test", email: "bfirestone2339@gmail.com")
+require 'csv'
 
-Movie.create(title: "Parasite", director: "Bong Joon-Ho", release_date: "10/05/2019", genre: "Thriller")
-Movie.create(title: "Dunkirk", director: "Christopher Nolan", release_date: "07/21/2017", genre: "Action")
-Movie.create(title: "Brief Encounter", director: "David Lean", release_date: "08/24/1946", genre: "Drama")
-Movie.create(title: "The Lobster", director: "Yorgos Lanthimos", release_date: "10/16/2015", genre: "Drama")
-Movie.create(title: "Ex Machina", director: "Alex Garland", release_date: "04/10/2015", genre: "Sci-Fi")
-Movie.create(title: "Ponyo", director: "Hayao Miyazaki", release_date: "07/19/2008", genre: "Fantasy")
+table = CSV.parse(File.read("lib/movies.csv"), headers: true)
 
+table.each do |r|
+    movie = Movie.create(title: r["title"], director: r["director"], genre: r["genre"], release_date: r["release date"])
 
+    if movie.title
+        movie.director = "n/a" if movie.director == nil
+        movie.genre = "n/a" if movie.genre == nil
+        movie.release_date = "n/a" if movie.release_date == nil
+        movie.save
+    else
+        movie.delete
+    end
+end
+
+reviews_table = CSV.parse(File.read("lib/reviews.csv"), headers: true)
+
+reviews_table.each do |r|
+    review = Review.create(rating: r[2].to_f, description: r[4], watch_date: r[3])
+    review.user = User.find_by(username: r[0].downcase)
+    review.movie = Movie.find_by(title: r[1])
+
+    if review.movie == nil
+        review.delete
+    else
+        review.save
+    end
+end
