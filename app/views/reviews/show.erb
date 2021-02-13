@@ -17,7 +17,11 @@
     <% unless @review.updated_at != @review.created_at %>
         <h3>Updated: </h3><p><%= @review.updated_at.strftime("%A,&nbsp;%B %e,&nbsp;%Y") %> at <%= @review.updated_at.strftime("%l:%M%p") %></p>
     <% end %>
-    <h3>Watch Date: </h3><p><%= @review.watch_date.strftime("%A,&nbsp;%B %e,&nbsp;%Y") %></p>
+    <% if @review.watch_date == "n/a" %>
+        <h3>Watch Date: </h3><p><%= @review.watch_date %></p>
+    <% else %>
+        <h3>Watch Date: </h3><p><%= @review.watch_date.strftime("%A,&nbsp;%B %e,&nbsp;%Y") %></p>
+    <% end %>
     <h3>Rating: </h3><p><%= @review.rating %></p>
     <h3>Review Description: </h3><p><%= @review.description %></p>
 </div>
