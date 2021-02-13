@@ -1,5 +1,12 @@
 require 'csv'
 
+User.create(username: "Brian", email: "bfirestone2339@gmail.com", password: "test")
+User.create(username: "Michael", email: "bfirestone2339@gmail.com", password: "test")
+User.create(username: "Jordan", email: "bfirestone2339@gmail.com", password: "test")
+User.create(username: "Andrew", email: "bfirestone2339@gmail.com", password: "test")
+User.create(username: "Marcus", email: "bfirestone2339@gmail.com", password: "test")
+
+
 table = CSV.parse(File.read("lib/movies.csv"), headers: true)
 
 table.each do |r|
