@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 
     get '/reviews' do
         @request
-        @reviews = Review.all.sort { |a, b| a.created_at <=> b.created_at }
+        @reviews = Review.all.sort { |a, b| b.created_at <=> a.created_at }
         if logged_in? 
             erb :'reviews/reviews'
         else
