@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
 
     get '/reviews' do
         @request
-        @reviews = Review.all
+        @reviews = Review.all.sort { |a, b| a.created_at <=> b.created_at }
         if logged_in? 
             erb :'reviews/reviews'
         else
@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
 
     get '/reviews/new' do
         if logged_in?
+            @movies = Movie.all.sort { |a, b| a.title <=> b.title }
             erb :'reviews/new'
         else
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
