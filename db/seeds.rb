@@ -26,7 +26,7 @@ reviews_table = CSV.parse(File.read("lib/reviews.csv"), headers: true)
 
 reviews_table.each do |r|
     review = Review.create(rating: r[2].to_f, description: r[4], watch_date: r[3])
-    review.user = User.find_by(username: r[0].downcase)
+    review.user = User.find_by(username: r[0])
     review.movie = Movie.find_by(title: r[1])
 
     if review.movie == nil
