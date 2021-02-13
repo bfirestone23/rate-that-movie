@@ -42,7 +42,6 @@
                     <% else %>
                         <td><%= review.watch_date.strftime("%-m/%-d/%Y") unless !movie.release_date %></td>
                     <% end %>
-                    <td><%= review.watch_date.strftime("%-m/%-d/%Y") %></td>
                     <td><a href="/reviews/<%= review.id %>">View Review</a></td>
                 </tr>
             <% end %>
