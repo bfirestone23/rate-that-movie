@@ -33,7 +33,7 @@
                 <th>Watch Date</th>
                 <th>Link</th>
             </tr>
-            <% @movie.reviews.each do |review| %>
+            <% @reviews.each do |review| %>
                 <tr>
                     <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
                     <td><%= review.rating %></td>
