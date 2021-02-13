@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     get '/users/:slug' do
         if logged_in?
             @user = User.find_by_slug(params[:slug])
+            @reviews = @user.reviews.sort { |a, b| b.created_at <=> a.created_at }
             erb :'users/show'
         else
             flash[:message] = "You do not have access to that page! Please log in or sign up below."
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
             @user = User.find_by_slug(params[:slug])
             @users = User.all
             if @user == current_user
+                @reviews = @user.reviews.sort { |a, b| b.created_at <=> a.created_at }
                 erb :'users/welcome'
             else
                 redirect to "/users/#{@user.slug}"
