@@ -2,7 +2,7 @@ class MoviesController < ApplicationController
 
     get '/movies' do
         @request
-        @movies = Movie.all
+        @movies = Movie.all.sort { |a, b| a.title <=> b.title }
         if logged_in?
             erb :'movies/movies'
         else
