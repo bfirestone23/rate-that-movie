@@ -32,7 +32,7 @@
     <h3>Your reviews:</h3>
     
     <div>
-        <% if @user.reviews.length > 1 %>
+        <% if @reviews.length > 1 %>
             <table>
                 <tr>
                     <th>Movie</th>
@@ -40,7 +40,7 @@
                     <th>Rating</th>
                     <th>Link</th>
                 </tr>
-                <% @user.reviews.each do |review| %>
+                <% @reviews.each do |review| %>
                     <tr>
                         <td><a href="/movies/<%= review.movie.slug %>"><%= review.movie.title %></a></td>
                         <td><%= review.movie.genre %></td>
