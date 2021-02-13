@@ -24,6 +24,7 @@ class MoviesController < ApplicationController
         if logged_in?
             @movie = Movie.find_by_slug(params[:slug])
             if @movie
+                @reviews = @movie.reviews.sort { |a, b| b.created_at <=> a.created_at }
                 erb :'movies/show'
             else
                 flash[:message] = "That movie does not exist."
