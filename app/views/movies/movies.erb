@@ -15,7 +15,7 @@
             <th>Genre</th>
             <th>Release Date</th>
         </tr>
-        <% Movie.all.each do |movie| %>
+        <% @movies.each do |movie| %>
             <tr>
                 <td><a href="/movies/<%= movie.slug %>"><%= movie.title %></a></td>
                 <td><%= movie.director %></td>
