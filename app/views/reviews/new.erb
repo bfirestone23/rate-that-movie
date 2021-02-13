@@ -9,7 +9,7 @@
         <label for="movie_title">Select a movie</label>
         <select id="movie_title" name="existing_movie[movie_id]">
         <option value="none" selected disabled hidden></option>
-        <% Movie.all.each do |movie| %>
+        <% @movies.each do |movie| %>
             <option value="<%=movie.id%>"><%= movie.title %><br>
         <% end %>
         </select>
