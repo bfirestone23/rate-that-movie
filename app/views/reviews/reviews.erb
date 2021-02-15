@@ -22,9 +22,9 @@
                 <td><%= review.movie.genre %></td>
                 <td><%= review.rating %></td>
                 <% if review.watch_date == "n/a" %>
-                    <h3>Watch Date: </h3><p>n/a</p>
+                    <td>"n/a"</td>
                 <% else %>
-                    <h3>Watch Date: </h3><p><%= review.watch_date.to_formatted_s(:long) %></p>
+                    <td><%= review.watch_date.strftime("%-m/%-d/%Y") unless !review.watch_date %></td>
                 <% end %>
                 <td><a href="/reviews/<%= review.id %>">View Review</a></td>
             </tr>
