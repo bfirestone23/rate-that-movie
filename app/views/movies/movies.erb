@@ -17,9 +17,9 @@
         </tr>
         <% @movies.each do |movie| %>
             <tr>
-                <td><a href="/movies/<%= movie.slug %>"><%= movie.title %></a></td>
-                <td><%= movie.director %></td>
-                <td><%= movie.genre %></td>
+                <td><a href="/movies/<%= movie.slug %>"><%= movie.title unless !movie.title %></a></td>
+                <td><%= movie.director unless !movie.director %></td>
+                <td><%= movie.genre unless !movie.director %></td>
                 <% if movie.release_date == "n/a" %>
                     <td>"n/a"</td>
                 <% else %>
