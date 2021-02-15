@@ -19,7 +19,7 @@
             <tr>
                 <td><a href="/movies/<%= movie.slug %>"><%= movie.title unless !movie.title %></a></td>
                 <td><%= movie.director unless !movie.director %></td>
-                <td><%= movie.genre unless !movie.director %></td>
+                <td><%= movie.genre unless !movie.genre %></td>
                 <% if movie.release_date == "n/a" %>
                     <td>"n/a"</td>
                 <% else %>
