@@ -22,11 +22,7 @@
                 <td><%= review.movie.genre %></td>
                 <td><%= review.rating %></td>
                 <% if review.watch_date == "n/a" %>
-                    <h3>Watch Date: </h3><p><%= review.watch_date %></p>
-                <% elsif review.watch_date == "" %>
                     <h3>Watch Date: </h3><p>n/a</p>
-                <% elsif review.watch_date.class != Date %>
-                    <h3>Watch Date: </h3><p><%= review.watch_date.to_s %></p>
                 <% else %>
                     <h3>Watch Date: </h3><p><%= review.watch_date.to_formatted_s(:long) %></p>
                 <% end %>
