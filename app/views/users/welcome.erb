@@ -14,9 +14,9 @@
     <h3>Select a user below to view their reviews:</h3>
     
     <div>
-        <% if @users.length > 1 %>
+        <% if @users.length > 0 %>
             <ul>
-            <% User.all.each do |u| %>
+            <% @users.each do |u| %>
                 <% if u != current_user %>
                     <li><a href="/users/<%= u.slug %>"><%= u.username %></a></li>
                 <% end %>
@@ -32,7 +32,7 @@
     <h3>Your reviews:</h3>
     
     <div>
-        <% if @reviews.length > 1 %>
+        <% if @reviews.length > 0 %>
             <table>
                 <tr>
                     <th>Movie</th>
