@@ -5,6 +5,7 @@ A RESTful web application built using Sinatra that allows users to create and sh
 ## Demo
 
 [Click here to view a demo!](https://drive.google.com/file/d/1fOOJc7fgact2PUPse6_cwbQ2ZAVZsv0U/view?usp=sharing) 
+[Click here to access the application via Heroku.](rate-that-movie.herokuapp.com/)
 
 ## Installation
 
