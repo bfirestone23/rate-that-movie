@@ -37,14 +37,14 @@
                 <tr>
                     <td><a href="/users/<%= review.user.slug %>"><%= review.user.username %></a></td>
                     <td><%= review.rating %></td>
-                    <% if review.watch_date == "n/a" %>
-                        <h3>Watch Date: </h3><p><%= review.watch_date %></p>
-                    <% elsif review.watch_date == "" %>
-                        <h3>Watch Date: </h3><p>n/a</p>
+                    <% if review.watch_date || review.watch_date == "n/a" %>
+                        <td><%= review.watch_date %></td>
+                    <% elsif review.watch_date == "" || review.watch_date == nil %>
+                        <td>n/a</td>
                     <% elsif review.watch_date.class != Date %>
-                        <h3>Watch Date: </h3><p><%= review.watch_date.to_s %></p>
+                        <td><%= review.watch_date.to_s %></td>
                     <% else %>
-                        <h3>Watch Date: </h3><p><%= review.watch_date.to_formatted_s(:long) %></p>
+                        <td><%= review.watch_date.to_formatted_s(:long) %></td>
                     <% end %>
                     <td><a href="/reviews/<%= review.id %>">View Review</a></td>
                 </tr>
