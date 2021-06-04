@@ -1,4 +1,4 @@
-# Rate A Movie
+# Rate That Movie
 
 A RESTful web application built using Sinatra that allows users to create and share movie reviews.
 
