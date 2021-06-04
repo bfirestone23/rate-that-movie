@@ -2,6 +2,10 @@
 
 A RESTful web application built using Sinatra that allows users to create and share movie reviews.
 
+## Demo
+
+[Click here to view a demo!](https://drive.google.com/file/d/1fOOJc7fgact2PUPse6_cwbQ2ZAVZsv0U/view?usp=sharing) 
+
 ## Installation
 
 Fork and clone this repository. Then install all dependencies:
